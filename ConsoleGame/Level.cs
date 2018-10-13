@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 namespace ConsoleGame
 {
     /// <summary>
@@ -26,7 +28,7 @@ namespace ConsoleGame
         /// </summary>
         /// <param name="width">Длина</param>
         /// <param name="height">Высота</param>
-        public Level(int width,int height)
+        public Level(int width, int height)
         {
             structure = new int[width, height];
         }
@@ -36,7 +38,7 @@ namespace ConsoleGame
         /// <param name="width">Длина</param>
         /// <param name="height">Высота</param>
         /// <param name="finish">Объект финиша</param>
-        public Level(int width, int height, Finish finish) : this(width,height)
+        public Level(int width, int height, Finish finish) : this(width, height)
         {
             AddObject(finish);
         }
@@ -46,9 +48,11 @@ namespace ConsoleGame
         public void AddObject(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
-            if (gameObject.can_contact)
-                redraw.Add(gameObjects.Count);
             GenerateStructure();
+            if (gameObject.can_contact)
+            {
+                redraw.Add(gameObjects.Count - 1);
+            }
         }
         /// <summary>
         /// Генерация структуры объектов
@@ -73,7 +77,7 @@ namespace ConsoleGame
         {
             for (int i = 0; i < redraw.Count; i++)
             {
-                gameObjects[i].Draw();
+                gameObjects[redraw[i]].Draw();
             }
         }
         /// <summary>
@@ -107,5 +111,6 @@ namespace ConsoleGame
 
             return true;
         }
+
     }
 }
