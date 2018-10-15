@@ -26,7 +26,7 @@ Player player = new Player(pos x, pos y, color, color, symbol);
 GameObject obj = new GameObject(x,y, widht, height , is can contact, symbol, color, background color );
 level.AddObject(obj);
 ```
-4.Enemies
+4. Enemies [optionally]
 ```
 Enemy enemy = new Enemy(pos x, pos y , damage);
 MovedEnemy m_enemy = new MovedEnemy(pos x , pos y, move interval, way points );
