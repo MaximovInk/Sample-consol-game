@@ -27,7 +27,14 @@ namespace ConsoleGame
         {
             Draw();
         }
-
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
+        /// <param name="back_color">Цвет фона</param>
+        /// <param name="color">Цвет символа</param>
+        /// <param name="symbol">Символ</param>
         public Player(int x, int y, ConsoleColor back_color, ConsoleColor color, char symbol) : this(x, y)
         {
             this.back_color = back_color;

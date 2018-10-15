@@ -9,8 +9,9 @@ namespace ConsoleGame
     class GameObject
     {
         //Позиция по x и y
-        public int pos_x;
-        public int pos_y;
+        //public int pos_x;
+        //public int pos_y;
+        public Point position;
         //Объект может контактировать
         public bool can_contact = true;
         //Длина
@@ -30,8 +31,9 @@ namespace ConsoleGame
         /// <param name="y">Начальная позиция y</param>
         public GameObject(int x, int y)
         {
-            pos_x = x;
-            pos_y = y;
+            //pos_x = x;
+            //pos_y = y;
+            position = new Point(x, y);
             color = ConsoleColor.White;
             Draw();
         }
@@ -89,7 +91,7 @@ namespace ConsoleGame
             {
                 for (int h = 0; h < height; h++)
                 {
-                    Console.SetCursorPosition(pos_x + w, pos_y + h);
+                    Console.SetCursorPosition(position.x + w, position.y + h);
                     Console.ForegroundColor = color;
                     Console.BackgroundColor = back_color;
                     Console.Write(symbol);
@@ -105,38 +107,38 @@ namespace ConsoleGame
         {
             lock (Program.locker)
             {
-                Thread.Sleep(Convert.ToInt32(1/Program.time));
+                Thread.Sleep(Convert.ToInt32(1/Program.time_speed));
                 //Если объект передвигается вправо
                 if (x > 0)
                 {
-                    if (pos_x + width + x > Program.level.Width)
+                    if (position.x + width + x > Program.level.Width)
                         return;
                 }
                 //Если объект передвигается влево
                 else if (x < 0)
                 {
-                    if (pos_x + x < 0)
+                    if (position.x + x < 0)
                         return;
                 }
                 //Если объект передвигается вниз
                 if (y > 0)
                 {
-                    if (pos_y + height + y > Program.level.Height)
+                    if (position.y + height + y > Program.level.Height)
                         return;
                 }
                 //Если объект передвигается вверх
                 else if (y < 0)
                 {
-                    if (pos_y + y < 0)
+                    if (position.y + y < 0)
                         return;
                 }
                 //Если в конечные координаты нельзя двигаться
-                if (Program.level.Can_move(pos_x, pos_y, x, y, width, height) == false)
+                if (Program.level.Can_move(position.x, position.y, x, y, width, height) == false)
                 {
                     return;
                 }
                 //Перерисовать игрока
-                Console.SetCursorPosition(pos_x, pos_y);
+                Console.SetCursorPosition(position.x, position.y);
                 for (int w = 0; w < width; w++)
                 {
                     for (int h = 0; h < height; h++)
@@ -144,8 +146,8 @@ namespace ConsoleGame
                         Console.Write(" ");
                     }
                 }
-                pos_x += x;
-                pos_y += y;
+                position.x += x;
+                position.y += y;
                 Draw();
                 Program.level.Redraw();
             }

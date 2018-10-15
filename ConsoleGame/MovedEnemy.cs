@@ -27,8 +27,15 @@ namespace ConsoleGame
             movement_thread = new Thread(Move);
             movement_thread.Start();
         }
-
-        public MovedEnemy(int x, int y, int damage, int interval_speed/*, MovedType movedType*/, List<Point> points) : this(x,y)
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="x">x</param>
+        /// <param name="y">y</param>
+        /// <param name="damage">Урон</param>
+        /// <param name="interval_speed">Интервал передвижения</param>
+        /// <param name="points">Точки пути</param>
+        public MovedEnemy(int x, int y, int damage, int interval_speed, List<Point> points) : this(x,y)
         {
             this.damage = damage;
             this.interval_speed = interval_speed;
@@ -42,8 +49,8 @@ namespace ConsoleGame
             {
                 current_point = 0;
             }
-            int x = WayPoints[current_point].x - pos_x;
-            int y = WayPoints[current_point].x - pos_y;
+            int x = WayPoints[current_point].x - position.x;
+            int y = WayPoints[current_point].x - position.y;
             if (x > 0)
             {
                 while (x > 0)
@@ -87,14 +94,10 @@ namespace ConsoleGame
             current_point++;
             Move();
         }
-
-        /*public enum MovedType
-        {
-           round, //Start >...> End >...> Start
-           line //Start >...> End > Start
-        }*/
     }
-
+    /// <summary>
+    /// Точка
+    /// </summary>
     public class Point
     {
         public int x = 0;

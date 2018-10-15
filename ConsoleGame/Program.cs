@@ -14,8 +14,8 @@ namespace ConsoleGame
         public static Player player;
         //Объект, синхронизирующий передвижение всех объектов
         public static object locker = new object();
-
-        public static float time = 1f;
+        //Скорость игры
+        public static float time_speed = 1f;
 
 
         private static void Main(string[] args)

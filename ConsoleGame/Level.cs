@@ -75,7 +75,7 @@ namespace ConsoleGame
                 {
                     for (int h = 0; h < gameObjects[i].height; h++)
                     {
-                        structure[gameObjects[i].pos_x + w, gameObjects[i].pos_y + h] = i;
+                        structure[gameObjects[i].position.y + w, gameObjects[i].position.y + h] = i;
                     }
                 }
             }
@@ -129,18 +129,13 @@ namespace ConsoleGame
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                if (enemies[i].pos_x == Program.player.pos_x && enemies[i].pos_y == Program.player.pos_y)
+                if (enemies[i].position.x == Program.player.position.x && enemies[i].position.y == Program.player.position.y)
                 {
                     Program.player.Damage(enemies[i].damage);
                 }
             }
             Thread.Sleep(10);
             Enemies();
-        }
-
-        protected virtual void OnLevelEnded()
-        {
-
         }
     }
 }
