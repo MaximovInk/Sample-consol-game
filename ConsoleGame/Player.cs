@@ -11,6 +11,18 @@ namespace ConsoleGame
     /// </summary>
     class Player : GameObject
     {
+        //Здоровье
+        public int health
+        {
+            get { return _health; }
+            set {
+                _health = value;
+                if (_health <= 0)
+                    Program.GameOver();
+            }
+        }
+        private int _health = 1;
+        
         public Player(int x , int y) : base(x,y)
         {
             Draw();
@@ -22,6 +34,14 @@ namespace ConsoleGame
             this.color = color;
             this.symbol = symbol;
             Draw();
+        }
+        /// <summary>
+        /// Нанесение урона
+        /// </summary>
+        /// <param name="value">Значение</param>
+        public void Damage(int value)
+        {
+            health -= value;
         }
     }
 }

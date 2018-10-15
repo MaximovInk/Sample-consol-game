@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 
 namespace ConsoleGame
 {
@@ -15,6 +16,11 @@ namespace ConsoleGame
         public List<GameObject> gameObjects = new List<GameObject>();
         //Список объектов без коллизии
         public List<int> redraw = new List<int>();
+        //Враги
+        private List<Enemy> enemies = new List<Enemy>();
+        //Поток для врагов
+        public static Thread enemies_thread;
+
         /// <summary>
         /// Получить высоту уровня
         /// </summary>
@@ -31,6 +37,8 @@ namespace ConsoleGame
         public Level(int width, int height)
         {
             structure = new int[width, height];
+            enemies_thread = new Thread(Enemies);
+            enemies_thread.Start();
         }
         /// <summary>
         /// Констурктор нового уровня
@@ -53,6 +61,8 @@ namespace ConsoleGame
             {
                 redraw.Add(gameObjects.Count - 1);
             }
+            if (gameObject is Enemy)
+                enemies.Add(gameObject as Enemy);
         }
         /// <summary>
         /// Генерация структуры объектов
@@ -79,6 +89,7 @@ namespace ConsoleGame
             {
                 gameObjects[redraw[i]].Draw();
             }
+            Program.player.Draw();
         }
         /// <summary>
         /// Можно ли переместить объект в координаты
@@ -111,6 +122,20 @@ namespace ConsoleGame
 
             return true;
         }
-
+        /// <summary>
+        /// Поток для атаки врагов
+        /// </summary>
+        void Enemies()
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (enemies[i].pos_x == Program.player.pos_x && enemies[i].pos_y == Program.player.pos_y)
+                {
+                    Program.player.Damage(enemies[i].damage);
+                }
+            }
+            Thread.Sleep(10);
+            Enemies();
+        }
     }
 }
