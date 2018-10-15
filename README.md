@@ -30,7 +30,8 @@ level.AddObject(obj);
 ```
 Enemy enemy = new Enemy(pos x, pos y , damage);
 MovedEnemy m_enemy = new MovedEnemy(pos x , pos y, move interval, way points );
-level.AddObject(obj);
+level.AddObject(m_enemy);
+level.AddObject(enemy);
 ```
 
 5. Add input
