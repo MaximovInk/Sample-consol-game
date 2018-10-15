@@ -15,6 +15,8 @@ namespace ConsoleGame
         //Объект, синхронизирующий передвижение всех объектов
         public static object locker = new object();
 
+        public static float time = 1f;
+
 
         private static void Main(string[] args)
         {
@@ -28,11 +30,11 @@ namespace ConsoleGame
         {
             //ScreenBuffer sb = new ScreenBuffer();
             level = new Level(20, 20, new Finish(19, 19));
-            //level.AddObject(new GameObject(5, 5, 3, 3, '|', false));
+            level.AddObject(new GameObject(5, 5, 3, 3, '|', false));
             player = new Player(0, 0, ConsoleColor.DarkYellow, ConsoleColor.Yellow, '*');
-            //level.AddObject(new Enemy(4, 4));
+            level.AddObject(new Enemy(4, 4));
             level.AddObject(new MovedEnemy(4, 4, 0, 200/*, MovedEnemy.MovedType.line*/, new List<Point>() { new Point(1, 5), new Point(5, 5), new Point(5,1), new Point(1,1) }));
-           // level.AddObject(new GameObject(2, 2, 1, 1, false, 'L', ConsoleColor.Magenta, ConsoleColor.Magenta));           
+            level.AddObject(new GameObject(2, 2, 1, 1, false, 'L', ConsoleColor.Magenta, ConsoleColor.Magenta));           
             Play();
         }
         /// <summary>

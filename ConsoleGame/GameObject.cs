@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace ConsoleGame
 {
@@ -104,6 +105,7 @@ namespace ConsoleGame
         {
             lock (Program.locker)
             {
+                Thread.Sleep(Convert.ToInt32(1/Program.time));
                 //Если объект передвигается вправо
                 if (x > 0)
                 {

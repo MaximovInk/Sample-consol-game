@@ -137,5 +137,10 @@ namespace ConsoleGame
             Thread.Sleep(10);
             Enemies();
         }
+
+        protected virtual void OnLevelEnded()
+        {
+
+        }
     }
 }
