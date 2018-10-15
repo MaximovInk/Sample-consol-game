@@ -26,7 +26,15 @@ Player player = new Player(pos x, pos y, color, color, symbol);
 GameObject obj = new GameObject(x,y, widht, height , is can contact, symbol, color, background color );
 level.AddObject(obj);
 ```
-4. Add input
+4. Enemies [optionally]
+```
+Enemy enemy = new Enemy(pos x, pos y , damage);
+MovedEnemy m_enemy = new MovedEnemy(pos x , pos y, move interval, way points );
+level.AddObject(m_enemy);
+level.AddObject(enemy);
+```
+
+5. Add input
 ```
 Play();
 ```
